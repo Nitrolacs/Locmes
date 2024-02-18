@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Locmes</string>
     <string name="search_field_text_fill">Поиск заметок</string>
+    <string name="your_notes">Ваши заметки</string>
+    <string name="note_title">Название</string>
+    <string name="type_note_here">Заметка</string>
 </resources>
