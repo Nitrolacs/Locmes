@@ -63,6 +63,9 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             finish();
+        } else if (id == R.id.nav_calendar) {
+            startActivity(new Intent(this, CalendarActivity.class));
+            finish();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

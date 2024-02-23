@@ -7,4 +7,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="activity_map_header">Карта с заметками</string>
+    <string name="activity_calendar_header">Календарь с заметками</string>
 </resources>

@@ -16,14 +16,14 @@ import android.widget.ImageView;
 import com.example.locmes.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CalendarActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_calendar);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             findViewById(R.id.backgroundImageBlurred).setRenderEffect(RenderEffect.createBlurEffect(80, 80, Shader.TileMode.CLAMP));
@@ -33,13 +33,12 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             findViewById(R.id.backgroundWhiteImageBlurred).setRenderEffect(RenderEffect.createBlurEffect(80, 80, Shader.TileMode.CLAMP));
         }
 
-
         ImageView menuButton = findViewById(R.id.menuButton);
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        navigationView.setCheckedItem(R.id.nav_settings);
+        navigationView.setCheckedItem(R.id.nav_calendar);
 
         menuButton.setOnClickListener(v -> {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -54,7 +53,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-
         if (id == R.id.nav_map) {
             startActivity(new Intent(this, MapActivity.class));
             finish();
@@ -62,12 +60,11 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         } else if (id == R.id.nav_notes) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
-
         } else if (id == R.id.nav_settings) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else if (id == R.id.nav_calendar) {
-            startActivity(new Intent(this, CalendarActivity.class));
+            startActivity(new Intent(this, SettingsActivity.class));
             finish();
+        } else if (id == R.id.nav_calendar) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
