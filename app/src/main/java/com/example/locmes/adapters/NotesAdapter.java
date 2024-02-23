@@ -50,17 +50,26 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
     static class NoteViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textTitle, textDateTime;
+        TextView textTitle, textDateTime, textNote;
 
         NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
             textDateTime = itemView.findViewById(R.id.textDateTime);
+            textNote = itemView.findViewById(R.id.textNote);
         }
 
         void setNote(Note note) {
             textTitle.setText(note.getTitle());
             textDateTime.setText(note.getDateTime());
+
+            String noteText = note.getNoteText();
+
+            if (noteText.length() < 50) {
+                textNote.setText(noteText);
+            } else {
+                textNote.setText(noteText.substring(0, 47) + "...");
+            }
         }
     }
 

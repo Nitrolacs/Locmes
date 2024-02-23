@@ -4,4 +4,7 @@
     <string name="your_notes">Ваши заметки</string>
     <string name="note_title">Название</string>
     <string name="type_note_here">Заметка</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="activity_map_header">Карта с заметками</string>
 </resources>

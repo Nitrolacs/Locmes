@@ -3,7 +3,7 @@
         android:id="@+id/layoutNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_12sdp"
         android:background="@drawable/background_search"
         android:orientation="vertical">
@@ -12,6 +12,7 @@
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:fontFamily="@font/montserrat_bold"
@@ -26,11 +27,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             android:fontFamily="@font/montserrat"
             android:includeFontPadding="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/_7sdp"
+            android:textSize="@dimen/_10sdp"
+        />
+
+    <TextView
+            android:id="@+id/textNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:fontFamily="@font/montserrat"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
         />
 
 </LinearLayout>
