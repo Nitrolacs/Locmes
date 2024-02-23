@@ -5,7 +5,7 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.MapActivity">
+        tools:context=".activities.SettingsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
                     android:includeFontPadding="false"
-                    android:text="@string/activity_map_header"
+                    android:text="Настройки"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:layout_marginTop="@dimen/_4sdp"
@@ -66,7 +66,7 @@
             <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/map_tmp" />
+                    android:src="@drawable/settings_tmp" />
         </RelativeLayout>
 
 
@@ -83,6 +83,5 @@
             app:itemTextColor="@color/black"
 
             app:itemBackground="@color/navigation_view_selector" />
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

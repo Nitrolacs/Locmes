@@ -16,14 +16,14 @@ import android.widget.ImageView;
 import com.example.locmes.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class MapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_settings);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             findViewById(R.id.backgroundImageBlurred).setRenderEffect(RenderEffect.createBlurEffect(80, 80, Shader.TileMode.CLAMP));
@@ -39,7 +39,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        navigationView.setCheckedItem(R.id.nav_map);
+        navigationView.setCheckedItem(R.id.nav_settings);
 
         menuButton.setOnClickListener(v -> {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -54,15 +54,17 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
+
         if (id == R.id.nav_map) {
-            drawerLayout.closeDrawer(GravityCompat.START);
+            startActivity(new Intent(this, MapActivity.class));
+            finish();
 
         } else if (id == R.id.nav_notes) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
+
         } else if (id == R.id.nav_settings) {
-            startActivity(new Intent(this, SettingsActivity.class));
-            finish();
+            drawerLayout.closeDrawer(GravityCompat.START);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
