@@ -4,13 +4,20 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CreateNoteActivity">
+        tools:context=".activities.CreateNoteActivity">
 
     <ImageView
             android:id="@+id/backgroundImageBlurred"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/background"
+            android:scaleType="centerCrop" />
+
+    <ImageView
+            android:id="@+id/backgroundWhiteImageBlurred"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/white_blur_background"
             android:scaleType="centerCrop" />
 
     <ScrollView
@@ -51,7 +58,7 @@
                     app:layout_constraintTop_toTopOf="@id/imageBack" />
 
             <EditText
-                    android:id="@+id/inputNodeTitle"
+                    android:id="@+id/inputNoteTitle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginStart="@dimen/_16sdp"
@@ -76,17 +83,17 @@
                     android:fontFamily="@font/montserrat"
                     android:includeFontPadding="false"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp"
-                    app:layout_constraintEnd_toEndOf="@id/inputNodeTitle"
-                    app:layout_constraintStart_toStartOf="@id/inputNodeTitle"
-                    app:layout_constraintTop_toBottomOf="@id/inputNodeTitle" />
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="@id/inputNoteTitle"
+                    app:layout_constraintStart_toStartOf="@id/inputNoteTitle"
+                    app:layout_constraintTop_toBottomOf="@id/inputNoteTitle" />
 
             <EditText
-                    android:id="@+id/inputNode"
+                    android:id="@+id/inputNote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:layout_marginBottom="@dimen/_15sdp"
                     android:background="@null"
@@ -101,7 +108,7 @@
                     android:textColorHint="@color/white"
                     android:textSize="@dimen/_14sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/inputNodeTitle" />
+                    app:layout_constraintTop_toBottomOf="@id/inputNoteTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
