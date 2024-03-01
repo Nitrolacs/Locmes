@@ -24,8 +24,13 @@ import java.util.Locale;
 
 public class CreateNoteActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE_ADD_TO_MAP = 1;
+    public static final int REQUEST_CODE_ADD_TO_CALENDAR = 2;
+
     private EditText inputNoteTitle, inputNoteText;
     private TextView textDateTime;
+
+    private Note alreadyAvailableNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +57,21 @@ public class CreateNoteActivity extends AppCompatActivity {
                 Character.toUpperCase(date.charAt(0)) + date.substring(1)
         );
 
+        if (getIntent().getBooleanExtra("isViewOrUpdate", false)) {
+            alreadyAvailableNote = (Note) getIntent().getSerializableExtra("note");
+            setViewOrUpdateNote();
+        }
+
         ImageView imageSave = findViewById(R.id.imageSave);
         imageSave.setOnClickListener(v -> saveNote());
+
+        ImageView imageAddToMap = findViewById(R.id.addToMap);
+        imageAddToMap.setOnClickListener(view -> startActivityForResult(new Intent(getApplicationContext(),
+                AddToMap.class), REQUEST_CODE_ADD_TO_MAP));
+
+        ImageView imageAddToCalendar = findViewById(R.id.addToCalendar);
+        imageAddToCalendar.setOnClickListener(view -> startActivityForResult(new Intent(getApplicationContext(),
+                AddToCalendar.class), REQUEST_CODE_ADD_TO_CALENDAR));
     }
 
     private void saveNote() {
@@ -69,6 +87,10 @@ public class CreateNoteActivity extends AppCompatActivity {
         note.setTitle(inputNoteTitle.getText().toString());
         note.setNoteText(inputNoteText.getText().toString());
         note.setDateTime(textDateTime.getText().toString());
+
+        if(alreadyAvailableNote != null) {
+            note.setId(alreadyAvailableNote.getId());
+        }
 
         class SaveNoteTask extends AsyncTask<Void, Void, Void> {
 
@@ -88,5 +110,12 @@ public class CreateNoteActivity extends AppCompatActivity {
         }
 
         new SaveNoteTask().execute();
+    }
+
+    private void setViewOrUpdateNote() {
+        inputNoteTitle.setText(alreadyAvailableNote.getTitle());
+        inputNoteText.setText(alreadyAvailableNote.getNoteText());
+        textDateTime.setText(alreadyAvailableNote.getDateTime());
+        // TODO: нужно тут сохранение геолокации и календаря.
     }
 }

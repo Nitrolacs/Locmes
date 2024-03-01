@@ -21,6 +21,7 @@ import com.example.locmes.R;
 import com.example.locmes.adapters.NotesAdapter;
 import com.example.locmes.database.NotesDatabase;
 import com.example.locmes.entities.Note;
+import com.example.locmes.listeners.NotesListener;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -28,15 +29,18 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NotesListener {
 
     public static final int REQUEST_CODE_ADD_NOTE = 1;
+    public static final int REQUEST_CODE_UPDATE_NOTE = 2;
 
     private DrawerLayout drawerLayout;
 
     public RecyclerView notesRecyclerView;
     private List<Note> noteList;
     private NotesAdapter notesAdapter;
+
+    private int noteClickedPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         );
 
         noteList = new ArrayList<>();
-        notesAdapter = new NotesAdapter(noteList);
+        notesAdapter = new NotesAdapter(noteList, this);
         notesRecyclerView.setAdapter(notesAdapter);
 
         getNotes();
@@ -78,6 +82,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+    }
+
+    @Override
+    public void onNoteClicked(Note note, int position) {
+        noteClickedPosition = position;
+        Intent intent = new Intent(getApplicationContext(), CreateNoteActivity.class);
+        intent.putExtra("isViewOrUpdate", true);
+        intent.putExtra("note", note);
+        startActivityForResult(intent, REQUEST_CODE_UPDATE_NOTE);
     }
 
     private void getNotes() {

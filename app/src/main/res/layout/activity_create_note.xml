@@ -47,6 +47,33 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                    android:id="@+id/deleteNode"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_delete"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBack"
+                    app:layout_constraintEnd_toStartOf="@+id/addToCalendar" />
+
+            <ImageView
+                    android:id="@+id/addToCalendar"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_calendar_white"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBack"
+                    app:layout_constraintEnd_toStartOf="@+id/addToMap" />
+
+            <ImageView
+                    android:id="@+id/addToMap"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_map_white"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBack"
+                    app:layout_constraintEnd_toStartOf="@+id/imageSave" />
+
+            <ImageView
                     android:id="@+id/imageSave"
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
