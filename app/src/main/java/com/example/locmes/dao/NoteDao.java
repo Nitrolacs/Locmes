@@ -20,5 +20,5 @@ public interface NoteDao {
     void insertNote(Note note);
 
     @Delete
-    void deleteNode(Note note);
+    void deleteNote(Note note);
 }

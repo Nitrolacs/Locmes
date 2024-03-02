@@ -1,14 +1,19 @@
 package com.example.locmes.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.RenderEffect;
 import android.graphics.Shader;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +34,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 
     private EditText inputNoteTitle, inputNoteText;
     private TextView textDateTime;
-
+    private AlertDialog dialogDeleteNote;
     private Note alreadyAvailableNote;
 
     @Override
@@ -72,6 +77,62 @@ public class CreateNoteActivity extends AppCompatActivity {
         ImageView imageAddToCalendar = findViewById(R.id.addToCalendar);
         imageAddToCalendar.setOnClickListener(view -> startActivityForResult(new Intent(getApplicationContext(),
                 AddToCalendar.class), REQUEST_CODE_ADD_TO_CALENDAR));
+
+        if (alreadyAvailableNote != null) {
+            findViewById(R.id.deleteNote).setVisibility(View.VISIBLE);
+            findViewById(R.id.deleteNote).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDeleteNoteDialog();
+                }
+            });
+        }
+    }
+
+    private void showDeleteNoteDialog() {
+        if (dialogDeleteNote == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteActivity.this);
+            View view = LayoutInflater.from(this).inflate(
+                    R.layout.layout_delete_note,
+                    (ViewGroup) findViewById(R.id.layoutDeleteNoteContainer)
+            );
+            builder.setView(view);
+            dialogDeleteNote = builder.create();
+            if (dialogDeleteNote.getWindow() != null) {
+                dialogDeleteNote.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            }
+            view.findViewById(R.id.textDeleteNote).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    @SuppressLint("StaticFieldLead")
+                    class DeleteNoteTask extends AsyncTask<Void, Void, Void> {
+
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            NotesDatabase.getDatabase(getApplicationContext()).noteDao()
+                                    .deleteNote(alreadyAvailableNote);
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void unused) {
+                            super.onPostExecute(unused);
+                            Intent intent = new Intent();
+                            intent.putExtra("isNoteDeleted", true);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }
+                    }
+
+                    new DeleteNoteTask().execute();
+                }
+            });
+
+            view.findViewById(R.id.textCancel).setOnClickListener(v -> dialogDeleteNote.dismiss());
+        }
+
+        dialogDeleteNote.show();
     }
 
     private void saveNote() {
@@ -88,7 +149,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         note.setNoteText(inputNoteText.getText().toString());
         note.setDateTime(textDateTime.getText().toString());
 
-        if(alreadyAvailableNote != null) {
+        if (alreadyAvailableNote != null) {
             note.setId(alreadyAvailableNote.getId());
         }
 

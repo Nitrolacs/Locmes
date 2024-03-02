@@ -47,10 +47,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                    android:id="@+id/deleteNode"
+                    android:id="@+id/deleteNote"
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
                     android:src="@drawable/ic_delete"
+                    android:visibility="gone"
                     android:layout_marginEnd="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageBack"
                     app:layout_constraintEnd_toStartOf="@+id/addToCalendar" />
