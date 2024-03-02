@@ -14,9 +14,15 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.example.locmes.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.navigation.NavigationView;
 
-public class MapActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
 
@@ -24,6 +30,11 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             findViewById(R.id.backgroundImageBlurred).setRenderEffect(RenderEffect.createBlurEffect(80, 80, Shader.TileMode.CLAMP));
@@ -49,6 +60,16 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             }
         });
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng location = new LatLng(55.994336798773816, 92.79748762057362);
+        googleMap.addMarker(new MarkerOptions()
+                .position(location)
+                .title("Новая заметка"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12));
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

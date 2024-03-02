@@ -14,13 +14,6 @@
             android:src="@drawable/background"
             android:scaleType="centerCrop" />
 
-    <ImageView
-            android:id="@+id/backgroundWhiteImageBlurred"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/white_blur_background"
-            android:scaleType="centerCrop" />
-
     <RelativeLayout
             android:id="@+id/appHeader"
             android:layout_width="match_parent"
@@ -51,23 +44,31 @@
     </RelativeLayout>
 
     <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/appHeader"
+            android:layout_marginTop="@dimen/_14sdp">
+
+        <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/appHeader"
-                android:layout_marginTop="@dimen/_52sdp"
-                >
+                android:layout_marginBottom="@dimen/_19sdp"
+                android:layout_height="601dp" />
 
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/add_note_to_map" />
-
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 android:layout_marginTop="@dimen/_80sdp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:src="@drawable/save_button" />
+
+        <ImageView
+                android:id="@+id/backgroundWhiteImageBlurred"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/white_blur_background"
+                android:scaleType="centerCrop" />
 
     </LinearLayout>
 

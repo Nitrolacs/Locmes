@@ -41,4 +41,5 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.6.1")
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 }

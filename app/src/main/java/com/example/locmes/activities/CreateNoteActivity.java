@@ -80,12 +80,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         if (alreadyAvailableNote != null) {
             findViewById(R.id.deleteNote).setVisibility(View.VISIBLE);
-            findViewById(R.id.deleteNote).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showDeleteNoteDialog();
-                }
-            });
+            findViewById(R.id.deleteNote).setOnClickListener(v -> showDeleteNoteDialog());
         }
     }
 
