@@ -13,17 +13,30 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.locmes.R;
 import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        imageView = (ImageView) findViewById(R.id.backgroundImageBlurred);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             findViewById(R.id.backgroundImageBlurred).setRenderEffect(RenderEffect.createBlurEffect(80, 80, Shader.TileMode.CLAMP));
@@ -33,13 +46,15 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             findViewById(R.id.backgroundWhiteImageBlurred).setRenderEffect(RenderEffect.createBlurEffect(80, 80, Shader.TileMode.CLAMP));
         }
 
-
         ImageView menuButton = findViewById(R.id.menuButton);
         drawerLayout = findViewById(R.id.drawer_layout);
+        ImageView changeWallpaperButton = findViewById(R.id.generateNewWallpaper);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView.setCheckedItem(R.id.nav_settings);
+
+        changeWallpaperButton.setOnClickListener(v -> changeWallpaper());
 
         menuButton.setOnClickListener(v -> {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -48,6 +63,26 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+
+
+    }
+
+    private void changeWallpaper() {
+        String url = "https://api.unsplash.com/photos/random?client_id=FOqpjZCuE8HGu_6nYLGZM8rOR7SIBZ1T1w6g25hjlJ8&query=nature";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                // Извлекаем URL изображения из JSON объекта
+                String imageUrl = response.getJSONObject("urls").getString("regular");
+                // Загружаем изображение в imageView с помощью Glide
+                Glide.with(SettingsActivity.this).load(imageUrl).into(imageView);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> error.printStackTrace());
+
+        // Добавляем запрос в очередь
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
     }
 
     @Override

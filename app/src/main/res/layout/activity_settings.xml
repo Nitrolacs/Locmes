@@ -64,6 +64,7 @@
                 app:layout_constraintStart_toStartOf="@+id/backgroundImageBlurred">
 
             <ImageView
+                    android:id="@+id/generateNewWallpaper"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/settings_tmp" />
